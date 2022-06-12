@@ -1,7 +1,15 @@
 <?php
 
 if (!function_exists('dd')) {
-    // Function dump & die
+    /**
+     * Dump and die
+     *
+     * @param  $data
+     * 
+     * @return void
+     * 
+     * @author longvc <vochilong.work@gmail.com>
+     */
     function dd($data)
     {
         var_dump($data);
@@ -10,7 +18,15 @@ if (!function_exists('dd')) {
 }
 
 if (!function_exists('ddArray')) {
-    // Function dump & die
+    /**
+     * Dump array 
+     *
+     * @param  $data
+     * 
+     * @return void
+     * 
+     * @author longvc <vochilong.work@gmail.com>
+     */
     function ddArray($data)
     {
         echo '<pre>',print_r($data, 1),'</pre>';
@@ -19,7 +35,13 @@ if (!function_exists('ddArray')) {
 }
 
 if (!function_exists('handleParamGET')) {
-    // Function handle requets get
+    /**
+     * Handle param get request
+     *
+     * @return array
+     * 
+     * @author longvc <vochilong.work@gmail.com>
+     */
     function handleParamGET()
     {
         $currentURL = $_SERVER['REQUEST_URI'];
@@ -36,5 +58,65 @@ if (!function_exists('handleParamGET')) {
         }
         
         return $result;
+    }
+}
+
+if (!function_exists('renderPagination')) {
+    /**
+     * Render pagination
+     *
+     * @param array $paginationData
+     * 
+     * @return void
+     * 
+     * @author longvc <vochilong.work@gmail.com>
+     */
+    function renderPagination($paginationData)
+    {
+        ddArray($paginationData);
+    }
+}
+
+if (!function_exists('getURLCurrentPage')) {
+    /**
+     * Get url current page
+     *
+     * @return mixed
+     * 
+     * @author longvc <vochilong.work@gmail.com>
+     */
+    function getURLCurrentPage()
+    {
+        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+            $url = "https://"; 
+        } else {
+            $url = "http://";
+        }  
+
+        $url.= $_SERVER['HTTP_HOST'];  
+
+        return $url .= $_SERVER['REDIRECT_URL'];
+    }
+}
+
+if (!function_exists('getFullURLCurrentPage')) {
+    /**
+     * Get full url current page
+     *
+     * @return mixed
+     * 
+     * @author longvc <vochilong.work@gmail.com>
+     */
+    function getFullURLCurrentPage()
+    {
+        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+            $url = "https://"; 
+        } else {
+            $url = "http://";
+        }  
+
+        $url.= $_SERVER['HTTP_HOST'];   
+        
+        return $url.= $_SERVER['REQUEST_URI'];    
     }
 }

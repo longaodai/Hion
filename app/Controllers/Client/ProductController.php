@@ -2,15 +2,22 @@
 namespace app\Controllers\Client;
 
 use app\Controllers\Controller;
-use app\Models\ProductModel;
+use App\Repositories\Product\ProductRepository;
 
 class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->model = new ProductModel;
+        $this->repository = new ProductRepository;
     }
 
+    /**
+     * Get list data
+     *
+     * @return midex
+     * 
+     * @author longvc <vochilong.work@gmail.com>
+     */
     public function index()
     {
         // Xử lý params
@@ -20,16 +27,33 @@ class ProductController extends Controller
             "search_price" => $request['search_price'] ?? null,
         ];
 
-        $data = $this->model->getAll($params);
+        $result = $this->repository->getAll($params);
+        // $data = $result['data'];
+        // $paginate = $result['paginate'];
 
-        return $this->view('product/index', ["data" => $data]);
+        return $this->view('product/index', ["data" => $result]);
+        // return $this->view('product/index', ["data" => $data, 'paginate' => $paginate]);
     }
 
+    /**
+     * Add form data
+     *
+     * @return mixed
+     * 
+     * @author longvc <vochilong.work@gmail.com>
+     */
     public function add()
     {
         return $this->view('product/store');
     }
 
+    /**
+     * Store data
+     *
+     * @return mixed
+     * 
+     * @author longvc <vochilong.work@gmail.com>
+     */
     public function store()
     {
         extract($_POST);
@@ -39,13 +63,22 @@ class ProductController extends Controller
             "description" => "",
         ];
         
-        $this->model->store($data);
+        $this->repository->store($data);
         
         header('location: /');
     }
 
+    /**
+     * Find data
+     *
+     * @param  $params
+     * 
+     * @return mixed
+     * 
+     * @author longvc <vochilong.work@gmail.com>
+     */
     public function find($params)
     {
-        dd($this->model->find($params));
+        dd($this->repository->find($params));
     }
 }

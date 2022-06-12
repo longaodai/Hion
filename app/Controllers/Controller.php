@@ -6,8 +6,18 @@ class Controller
 {
     public $page;
     public $data;
-    public $model = null;
+    public $repository = null;
 
+    /**
+     * Include master view
+     *
+     * @param string $page
+     * @param array $data
+     * 
+     * @return 
+     * 
+     * @author longvc <vochilong.work@gmail.com>
+     */
     public function view($page, $data = [])
     {
         $this->page = $page;

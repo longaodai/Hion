@@ -8,9 +8,10 @@
     </div>
     <div>
         <label for="">price</label>
-        <input type="text" name="search_price">
+        <input type="text" name="search_price" value="<?= handleParamGET()['search_price'] ?? null ?>">
     </div>
     <button type="submit">Search</button>
+    <a href="<?= getURLCurrentPage()?>">Reset</a>
 </form>
 <hr>
 <?php foreach($data['data'] as $item): ?>
@@ -20,3 +21,5 @@
     <span><?= $item['description'] ?? "-" ?></span><br>
     <hr>
 <?php endforeach ?>
+
+<!-- <?php renderPagination($data['paginate']) ?> -->
