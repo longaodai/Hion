@@ -27,12 +27,13 @@ class ProductController extends Controller
             "search_price" => $request['search_price'] ?? null,
         ];
 
-        $result = $this->repository->getAll($params);
-        // $data = $result['data'];
-        // $paginate = $result['paginate'];
+        $result = $this->repository->getList($params);
+        $data = $result['data'];
+        $paginate = $result['paginate'];
+        // dd($paginate);
 
-        return $this->view('product/index', ["data" => $result]);
-        // return $this->view('product/index', ["data" => $data, 'paginate' => $paginate]);
+        // return $this->view('product/index', ["data" => $result]);
+        return $this->view('product/index', ["data" => $data, 'paginate' => $paginate]);
     }
 
     /**

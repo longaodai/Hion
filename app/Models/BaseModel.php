@@ -61,10 +61,11 @@ class BaseModel extends BaseQuery
      */
     public function getList($params)
     {
-        $data['data'] = $this->pagination()->get();
         $data['paginate'] = [
-            'currentPage' => $this->currentPage,
+            'current_page' => $this->currentPage,
+            'number_of_page' => ceil(count($this->get()) / $this->currentPage),
         ];
+        $data['data'] = $this->pagination()->get();
 
         return $data;
     }

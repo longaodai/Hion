@@ -42,15 +42,12 @@ class BaseQuery extends Connect
     }
 
     /**
-     * Pagination data
+     * Pagination
      *
-     * @param int $limit
-     * 
-     * @return void
-     * 
-     * @author longvc <vochilong.work@gmail.com>
+     * @param null $limit
+     * @return mixed
      */
-    public function pagination($limit = DEFAULT_LIMIT_PAGE)
+    public function pagination($limit = null)
     {
         if (empty($_GET['page']) || $_GET['page'] < DEFAULT_CURRENT_PAGE) {
             $this->currentPage = DEFAULT_CURRENT_PAGE;
@@ -58,6 +55,9 @@ class BaseQuery extends Connect
             $this->currentPage = $_GET['page'];
         }
 
+        if (empty($limit)) {
+            $limit = DEFAULT_LIMIT_PAGE;
+        }
 
         $getDataPage = ($this->currentPage - 1) * $limit;
         $this->sql = $this->sql . "LIMIT $getDataPage, $limit";
@@ -135,5 +135,10 @@ class BaseQuery extends Connect
         $this->sql = "INSERT INTO $this->table ($column) VALUES ($values)";
 
         return $this->execute($this->sql);
+    }
+
+    public function countRecord()
+    {
+        $this->sql = "SELECT count(*) FROM $this->table";
     }
 }
