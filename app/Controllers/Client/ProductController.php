@@ -1,4 +1,5 @@
 <?php
+
 namespace app\Controllers\Client;
 
 use app\Controllers\Controller;
@@ -18,7 +19,7 @@ class ProductController extends Controller
      * 
      * @author longvc <vochilong.work@gmail.com>
      */
-    public function index()
+    public function index(...$args)
     {
         // Xử lý params
         $request = handleParamGET();
@@ -63,9 +64,9 @@ class ProductController extends Controller
             "price" => $price_product,
             "description" => "",
         ];
-        
+
         $this->repository->store($data);
-        
+
         header('location: /');
     }
 
@@ -80,6 +81,6 @@ class ProductController extends Controller
      */
     public function find($params)
     {
-        dd($this->repository->find($params));
+        dd('This is method find');
     }
 }

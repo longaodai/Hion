@@ -1,6 +1,17 @@
 <?php
 
-require_once "./app/Helpers/const.php";
-require_once "./app/Helpers/helper.php";
-require_once "./auto_load.php";
-require_once "./handle.php";
+/**
+ * Require file autoload
+ */
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+} else {
+    require_once __DIR__ . '/system/autoload.php';
+}
+
+/**
+ * Require file system
+ */
+if (file_exists(__DIR__ . '/system/system_register.php')) {
+    require_once __DIR__ . '/system/system_register.php';
+}
