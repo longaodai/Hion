@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /BaseProjectPHP/
+RewriteBase /OhionCodeBasePHP/
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f

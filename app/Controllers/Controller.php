@@ -2,7 +2,7 @@
 
 namespace app\Controllers;
 
-class Controller 
+class Controller
 {
     public $page;
     public $data;
@@ -22,7 +22,7 @@ class Controller
     {
         $this->page = $page;
         $this->data = $data;
-        
+
         return include_once PATH_MASTER_LAYOUT;
     }
 }
