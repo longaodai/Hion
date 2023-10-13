@@ -1,2 +1,7 @@
 /storage/logs/*
 /.env
+/vendor/composer/
+/vendor/autoload.php
+/.idea/*
+!/vendor/hion/*
+/vendor/bin/

@@ -1,6 +1,6 @@
 <?php
 
-namespace database;
+namespace Hion\Base\Database;
 
 class BaseQuery extends Connect
 {
@@ -12,8 +12,8 @@ class BaseQuery extends Connect
      * Query get data exec sql
      *
      * @return mixed
-     * 
-     * @author longvc <vochilong.work@gmail.com>
+     *
+     * @author vochilong <vochilong.work@gmail.com>
      */
     public function get()
     {
@@ -24,10 +24,10 @@ class BaseQuery extends Connect
      * Select column in table
      *
      * @param array $params
-     * 
-     * @return void
-     * 
-     * @author longvc <vochilong.work@gmail.com>
+     *
+     * @return BaseQuery
+     *
+     * @author vochilong <vochilong.work@gmail.com>
      */
     public function select($params = [])
     {
@@ -35,7 +35,7 @@ class BaseQuery extends Connect
         if (count($params) > 0) {
             $column = implode(',', $params);
         }
-        
+
         $this->sql = $this->sql . "SELECT $column FROM $this->table ";
 
         return $this;
@@ -66,15 +66,15 @@ class BaseQuery extends Connect
     }
 
     /**
-     * Where conditon column table
+     * Where condition column table
      *
      * @param  $column
      * @param  $condition
      * @param  $params
-     * 
-     * @return void
-     * 
-     * @author longvc <vochilong.work@gmail.com>
+     *
+     * @return BaseQuery
+     *
+     * @author vochilong <vochilong.work@gmail.com>
      */
     public function where($column, $condition, $params)
     {
@@ -89,10 +89,10 @@ class BaseQuery extends Connect
      * @param  $column
      * @param  $condition
      * @param  $params
-     * 
-     * @return 
-     * 
-     * @author longvc <vochilong.work@gmail.com>
+     *
+     * @return
+     *
+     * @author vochilong <vochilong.work@gmail.com>
      */
     public function andWhere($column, $condition, $params)
     {
@@ -105,9 +105,9 @@ class BaseQuery extends Connect
      * Show sql string
      * Must use before get()
      *
-     * @return 
-     * 
-     * @author longvc <vochilong.work@gmail.com>
+     * @return
+     *
+     * @author vochilong <vochilong.work@gmail.com>
      */
     public function toSql()
     {
@@ -119,10 +119,10 @@ class BaseQuery extends Connect
      * Create data
      *
      * @param array $params
-     * 
-     * @return 
-     * 
-     * @author longvc <vochilong.work@gmail.com>
+     *
+     * @return
+     *
+     * @author vochilong <vochilong.work@gmail.com>
      */
     public function create($params)
     {

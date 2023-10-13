@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace Hion\Base\Repository;
 
-class BaseRepository
+class Repository
 {
     public $model;
 
@@ -11,10 +11,10 @@ class BaseRepository
      *
      * @param null $data
      * @param null $options
-     * 
+     *
      * @return mixed
-     * 
-     * @author longvc <vochilong.work@gmail.com>
+     *
+     * @author vochilong <vochilong.work@gmail.com>
      */
     public function getAll($data = null, $options = null)
     {
@@ -26,10 +26,10 @@ class BaseRepository
      *
      * @param null $data
      * @param null $options
-     * 
+     *
      * @return mixed
-     * 
-     *  @author longvc <vochilong.work@gmail.com>
+     *
+     * @author vochilong <vochilong.work@gmail.com>
      */
     public function getList($data = null, $options = null)
     {
@@ -42,10 +42,10 @@ class BaseRepository
      *
      * @param null $data
      * @param null $options
-     * 
+     *
      * @return array
-     * 
-     * @author longvc <vochilong.work@gmail.com>
+     *
+     * @author vochilong <vochilong.work@gmail.com>
      */
     public function buildParam($data = null, $options = null)
     {

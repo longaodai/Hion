@@ -1,17 +1,16 @@
 <?php
 
-/**
- * Require file autoload
- */
-if (file_exists(__DIR__ . '/vendor/autoload.php')) {
-    require_once __DIR__ . '/vendor/autoload.php';
-} else {
-    require_once __DIR__ . '/system/autoload.php';
-}
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader for
+| our application. We just need to utilize it! We'll simply require it
+| into the script here so that we don't have to worry about manual
+| loading any of our classes later on. It feels great to relax.
+|
+*/
+require_once __DIR__.'/bootstrap/autoload.php';
 
-/**
- * Require file system
- */
-if (file_exists(__DIR__ . '/system/system_register.php')) {
-    require_once __DIR__ . '/system/system_register.php';
-}
+require_once __DIR__.'/bootstrap/app.php';

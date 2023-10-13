@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use database\BaseQuery;
+use Hion\Base\Model\Models;
 
-class BaseModel extends BaseQuery
+class BaseModel extends Models
 {
     /**
      * Get data from params

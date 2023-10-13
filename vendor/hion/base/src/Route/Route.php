@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Routes;
+namespace Hion\Base\Route;
 
 class Route
 {
@@ -8,8 +8,8 @@ class Route
      * Get request
      *
      * @return String
-     * 
-     * @author longvc <vochilong.work@gmail.com>
+     *
+     * @author vochilong <vochilong.work@gmail.com>
      */
     private function getRequest()
     {
@@ -22,10 +22,10 @@ class Route
      * Check is method
      *
      * @param String $requestMethod
-     * 
+     *
      * return void
-     * 
-     * @author longvc <vochilong.work@gmail.com>
+     *
+     * @author vochilong <vochilong.work@gmail.com>
      */
     private function isMethod($requestMethod)
     {
@@ -45,10 +45,10 @@ class Route
      * @param $url
      * @param $controller
      * @param $method
-     * 
+     *
      * @return void
-     * 
-     * @author longvc <vochilong.work@gmail.com>
+     *
+     * @author vochilong <vochilong.work@gmail.com>
      */
     public function get($url, $controller, $method)
     {
@@ -90,10 +90,10 @@ class Route
      * @param $url
      * @param $controller
      * @param $method
-     * 
+     *
      * @return void
-     * 
-     * @author longvc <vochilong.work@gmail.com>
+     *
+     * @author vochilong <vochilong.work@gmail.com>
      */
     public function post($url, $controller, $method)
     {
@@ -103,27 +103,27 @@ class Route
          * Prepare pattern match
          */
         $pattern = '~^' . $url . '$~i';
-        $resultPatern = false;
+        $resultPattern = false;
         $urlRequest = $this->getRequest();
 
         /**
          * Check pattern and get params match
          */
         if (preg_match($pattern, $urlRequest, $matches)) {
-            $resultPatern = $matches;
+            $resultPattern = $matches;
         }
 
-        if (!$resultPatern) {
+        if (!$resultPattern) {
             return $this;
         }
 
-        unset($resultPatern[0]);
-        $intanceController = new $controller;
+        unset($resultPattern[0]);
+        $instanceController = new $controller;
 
-        if (count($resultPatern) > 0) {
-            call_user_func_array([$intanceController, $method], $resultPatern);
+        if (count($resultPattern) > 0) {
+            call_user_func_array([$instanceController, $method], $resultPattern);
         } else {
-            $intanceController->{$method}();
+            $instanceController->{$method}();
         }
 
         exit();

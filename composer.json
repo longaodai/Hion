@@ -1,0 +1,30 @@
+{
+    "name": "hion/hion",
+    "description": "The Hion Framework",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": [
+            "app/Helpers/helpers.php",
+            "app/Helpers/constants.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Vo Chi Long",
+            "email": "vochilong.work@gmail.com"
+        }
+    ],
+    "require": {
+        "hion/base": "*"
+    },
+    "repositories": {
+        "hion/base": {
+            "type": "path",
+            "url": "vendor/hion/base"
+        }
+    },
+    "minimum-stability": "dev"
+}

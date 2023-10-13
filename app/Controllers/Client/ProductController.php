@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Controllers\Client;
+namespace App\Controllers\Client;
 
-use app\Controllers\Controller;
+use App\Controllers\Controller;
 use App\Repositories\Product\ProductRepository;
 
 class ProductController extends Controller

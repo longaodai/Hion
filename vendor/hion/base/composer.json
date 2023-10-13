@@ -1,0 +1,18 @@
+{
+    "name": "hion/base",
+    "description": "The Hion package.",
+    "autoload": {
+        "psr-4": {
+            "Hion\\Base\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vo Chi Long",
+            "email": "vochilong.work@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {}
+}

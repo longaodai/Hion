@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    privileged: true
+    volumes:
+      - .:/var/www/app
+    ports:
+      - 8001:80

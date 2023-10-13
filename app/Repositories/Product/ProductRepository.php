@@ -2,13 +2,13 @@
 
 namespace App\Repositories\Product;
 
-use app\Models\ProductModel;
-use App\Repositories\BaseRepository;
+use App\Models\ProductModel;
+use Hion\Base\Repository\Repository;
 
 /**
  * ProductRepository
  */
-class ProductRepository extends BaseRepository
+class ProductRepository extends Repository
 {
     public function __construct()
     {

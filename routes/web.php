@@ -1,10 +1,8 @@
 <?php
 
-namespace Routes;
-
-use app\Controllers\Client\HomeController;
-use app\Controllers\Client\ProductController;
-use System\Routes\Route;
+use App\Controllers\Client\HomeController;
+use App\Controllers\Client\ProductController;
+use Hion\Base\Route\Route;
 
 $route = new Route();
 
