@@ -2,15 +2,8 @@
 
 namespace App\Controllers;
 
-class Controller
+class ControllerBase
 {
-    public $controllerBase;
-
-    public function __construct(ControllerBase $controllerBase)
-    {
-        $this->controllerBase = $controllerBase;
-    }
-
     public $page;
     public $data;
     public $repository = null;

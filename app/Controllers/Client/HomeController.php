@@ -3,11 +3,19 @@
 namespace App\Controllers\Client;
 
 use App\Controllers\Controller;
+use App\Controllers\Request;
 
-class HomeController extends Controller
+class HomeController
 {
-    public function index($params = null)
+    protected $controller;
+
+    public function __construct(Controller $controller)
     {
-        return $this->view('home');
+        $this->controller = $controller;
+    }
+
+    public function index(Request $request) //
+    {
+        return $this->controller->view('home');
     }
 }

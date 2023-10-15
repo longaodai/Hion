@@ -2,6 +2,8 @@
 
 namespace Hion\Base\Route;
 
+use Hion\Base\Container\DependencyResolver;
+
 class Route
 {
     /**
@@ -73,12 +75,18 @@ class Route
         }
 
         unset($resultPatern[0]);
-        $intanceController = new $controller;
+        $di = new DependencyResolver();
+        // var_dump($di->_resolve($controller));
+        // // var_dump($controller);
+        // die();
+
+        $intanceController = $di->_resolve($controller);
+        $intanceController->{$method}($di->_resolveMethod($controller, $method));
 
         if (count($resultPatern) > 0) {
             call_user_func_array([$intanceController, $method], $resultPatern);
         } else {
-            $intanceController->{$method}();
+            // $intanceController->{$method}();
         }
 
         exit();
