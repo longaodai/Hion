@@ -3,6 +3,7 @@
 namespace Hion\Base\Database;
 
 use Exception;
+use PDO;
 
 class Connect
 {
@@ -16,12 +17,12 @@ class Connect
     {
         try {
             if (empty(self::$connect)) {
-                self::$connect = new \PDO(
-                    "mysql:host=$this->server_name;
-                    dbname=$this->database_name",
-                    $this->username, $this->password
-                );
-                self::$connect->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+//                self::$connect = new PDO(
+//                    "mysql:host=$this->server_name;
+//                    dbname=$this->database_name",
+//                    $this->username, $this->password
+//                );
+//                self::$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
 
             return self::$connect;

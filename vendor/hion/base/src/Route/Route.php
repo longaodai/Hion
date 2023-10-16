@@ -81,12 +81,11 @@ class Route
         // die();
 
         $intanceController = $di->_resolve($controller);
-        $intanceController->{$method}($di->_resolveMethod($controller, $method));
 
         if (count($resultPatern) > 0) {
-            call_user_func_array([$intanceController, $method], $resultPatern);
+            $intanceController->{$method}($resultPatern, ...$di->_resolveMethod($controller, $method));
         } else {
-            // $intanceController->{$method}();
+            $intanceController->{$method}(...$di->_resolveMethod($controller, $method));
         }
 
         exit();

@@ -18,4 +18,9 @@ class HomeController
     {
         return $this->controller->view('home');
     }
+
+    public function index2() //
+    {
+        return $this->controller->view('home');
+    }
 }

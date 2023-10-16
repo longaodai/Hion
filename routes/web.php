@@ -10,5 +10,6 @@ $route = new Route();
 
 $route->get('/', HomeController::class, 'index');
 $route->get('home', HomeController::class, 'index');
+$route->get('home1', HomeController::class, 'index2');
 $route->get('product', ProductController::class, 'index');
 $route->get('product/(\d+)', ProductController::class, 'find');

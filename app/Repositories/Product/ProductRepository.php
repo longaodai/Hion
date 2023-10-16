@@ -10,9 +10,9 @@ use Hion\Base\Repository\Repository;
  */
 class ProductRepository extends Repository
 {
-    public function __construct()
+    public function __construct(ProductModel $productModel)
     {
-        $this->model = new ProductModel;
+        $this->model = $productModel;
     }
 
     /**

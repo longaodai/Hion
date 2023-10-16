@@ -10,7 +10,7 @@ if (!function_exists('dd')) {
      * 
      * @author longvc <vochilong.work@gmail.com>
      */
-    function dd($data)
+    function dd(...$data)
     {
         var_dump($data);
         die();

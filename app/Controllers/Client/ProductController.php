@@ -7,9 +7,11 @@ use App\Repositories\Product\ProductRepository;
 
 class ProductController extends Controller
 {
-    public function __construct()
+    public $repository;
+
+    public function __construct(ProductRepository $productRepository)
     {
-        $this->repository = new ProductRepository;
+        $this->repository = $productRepository;
     }
 
     /**
@@ -19,10 +21,11 @@ class ProductController extends Controller
      * 
      * @author longvc <vochilong.work@gmail.com>
      */
-    public function index(...$args)
+    public function index()
     {
         // Xử lý params
         $request = handleParamGET();
+        dd(123);
         $params = [
             "search_name" => $request['search_name'] ?? null,
             "search_price" => $request['search_price'] ?? null,

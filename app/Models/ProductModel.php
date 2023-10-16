@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\BaseModel;
-
 class ProductModel extends BaseModel
 {
     public $table = "product";

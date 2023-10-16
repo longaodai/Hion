@@ -35,36 +35,30 @@ class DependencyResolver
 
             return $reflection->newInstanceArgs($dependencies);
         }
+
+        return new $className;
     }
 
-    public function _resolveMethod(string $className, $method)
+    public function _resolveMethod($className, $methodName)
     {
-        $reflection = new ReflectionClass($className);
-        $constructor = $reflection->getMethods();
+        $reflectionClass = new ReflectionClass($className);
 
-        if (!$constructor) {
-            return new $className;
-        }
-
-        foreach ($constructor as $constructor1) {
-            if ($constructor1->name != $method) {
-                continue;
-            }
-
-            $parameters = $constructor1->getParameters();
+        if ($reflectionClass->hasMethod($methodName)) {
+            $reflectionMethod = $reflectionClass->getMethod($methodName);
+            $parameters = $reflectionMethod->getParameters();
             $dependencies = [];
 
             foreach ($parameters as $parameter) {
-                $dependencyType = $parameter->getType();
+                $parameterName = $parameter->getName();
+                $parameterType = $parameter->getType();
 
-
-                if ($dependencyType) {
-                    $dependencies[] = $this->_resolve($dependencyType->getName());
+                if ($parameterType) {
+                    $di = $parameterType->getName();
+                    $dependencies[] = $this->_resolve($di);
                 }
-
-
-                return $reflection->newInstanceArgs($dependencies);
             }
+
+            return $dependencies;
         }
     }
 }
