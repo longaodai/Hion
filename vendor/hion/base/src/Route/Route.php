@@ -6,6 +6,12 @@ use Hion\Base\Container\DependencyResolver;
 
 class Route
 {
+    const GET = 'GET';
+    const POST = 'POST';
+    const PUT = 'PUT';
+    const DELETE = 'DELETE';
+    private $_is_route_not_found = true;
+
     /**
      * Get request
      *
@@ -31,13 +37,7 @@ class Route
      */
     private function isMethod($requestMethod)
     {
-        if ($_SERVER['REQUEST_METHOD'] !== $requestMethod) {
-            if (env('APP_ENV') == 'production') {
-                exit('500 !!!');
-            }
-
-            exit('Method not allowed !!!');
-        }
+        return $_SERVER['REQUEST_METHOD'] == $requestMethod;
     }
 
 
@@ -54,57 +54,9 @@ class Route
      */
     public function get($url, $controller, $method)
     {
-        $this->isMethod('GET');
-
-        /**
-         * Prepare pattern match
-         */
-        $pattern = '~^' . $url . '$~i';
-        $resultPatern = false;
-        $urlRequest = $this->getRequest();
-
-        /**
-         * Check pattern and get params match
-         */
-        if (preg_match($pattern, $urlRequest, $matches)) {
-            $resultPatern = $matches;
-        }
-
-        if (!$resultPatern) {
-            return $this;
-        }
-
-        unset($resultPatern[0]);
-        $di = new DependencyResolver();
-        // var_dump($di->_resolve($controller));
-        // // var_dump($controller);
-        // die();
-
-        $intanceController = $di->_resolve($controller);
-
-        if (count($resultPatern) > 0) {
-            $intanceController->{$method}($resultPatern, ...$di->_resolveMethod($controller, $method));
-        } else {
-            $intanceController->{$method}(...$di->_resolveMethod($controller, $method));
-        }
-
-        exit();
-    }
-
-    /**
-     * Route post
-     *
-     * @param $url
-     * @param $controller
-     * @param $method
-     *
-     * @return void
-     *
-     * @author vochilong <vochilong.work@gmail.com>
-     */
-    public function post($url, $controller, $method)
-    {
-        $this->isMethod('POST');
+        if (!$this->isMethod(self::GET)) {
+            return;
+        };
 
         /**
          * Prepare pattern match
@@ -124,15 +76,73 @@ class Route
             return $this;
         }
 
+        $this->_is_route_not_found = false;
         unset($resultPattern[0]);
-        $instanceController = new $controller;
+        $resolver = new DependencyResolver();
+        $intanceController = $resolver->_resolve($controller);
 
         if (count($resultPattern) > 0) {
-            call_user_func_array([$instanceController, $method], $resultPattern);
+            $intanceController->{$method}($resultPattern, ...$resolver->_resolveMethod($controller, $method));
         } else {
-            $instanceController->{$method}();
+            $intanceController->{$method}(...$resolver->_resolveMethod($controller, $method));
         }
 
         exit();
+    }
+
+    /**
+     * Route post
+     *
+     * @param $url
+     * @param $controller
+     * @param $method
+     *
+     * @return void
+     *
+     * @author vochilong <vochilong.work@gmail.com>
+     */
+    public function post($url, $controller, $method)
+    {
+        if (!$this->isMethod(self::POST)) {
+            return;
+        };
+        
+        /**
+         * Prepare pattern match
+         */
+        $pattern = '~^' . $url . '$~i';
+        $resultPattern = false;
+        $urlRequest = $this->getRequest();
+
+        /**
+         * Check pattern and get params match
+         */
+        if (preg_match($pattern, $urlRequest, $matches)) {
+            $resultPattern = $matches;
+        }
+
+        if (!$resultPattern) {
+            return $this;
+        }
+
+        $this->_is_route_not_found = false;
+        unset($resultPattern[0]);
+        $resolver = new DependencyResolver();
+        $intanceController = $resolver->_resolve($controller);
+
+        if (count($resultPattern) > 0) {
+            $intanceController->{$method}($resultPattern, ...$resolver->_resolveMethod($controller, $method));
+        } else {
+            $intanceController->{$method}(...$resolver->_resolveMethod($controller, $method));
+        }
+
+        exit();
+    }
+
+    public function __destruct()
+    {
+        if ($this->_is_route_not_found) {
+            exit('404 Not Found');
+        }
     }
 }

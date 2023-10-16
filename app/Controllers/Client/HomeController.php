@@ -3,7 +3,7 @@
 namespace App\Controllers\Client;
 
 use App\Controllers\Controller;
-use App\Controllers\Request;
+use Hion\Base\Http\Request;
 
 class HomeController
 {
@@ -16,11 +16,14 @@ class HomeController
 
     public function index(Request $request) //
     {
+        dd($request->onlyValue(['test', 'gae']));
+
         return $this->controller->view('home');
     }
 
     public function index2() //
     {
+        dd($_GET, $_POST);
         return $this->controller->view('home');
     }
 }

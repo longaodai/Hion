@@ -13,6 +13,17 @@ class DependencyResolver
         $this->dependencies[$name] = $className;
     }
 
+    /**
+     * Resolve class dependence injection
+     *
+     * @param string $className
+     *
+     * @return mixed|object|string|null
+     *
+     * @throws \ReflectionException
+     *
+     * @author <vochilong>
+     */
     public function _resolve(string $className)
     {
         $reflection = new ReflectionClass($className);
@@ -39,6 +50,18 @@ class DependencyResolver
         return new $className;
     }
 
+    /**
+     * Resolve method dependence injection
+     *
+     * @param $className
+     * @param $methodName
+     *
+     * @return array|void
+     *
+     * @throws \ReflectionException
+     *
+     * @author <vochilong>
+     */
     public function _resolveMethod($className, $methodName)
     {
         $reflectionClass = new ReflectionClass($className);
